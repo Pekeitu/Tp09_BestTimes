@@ -11,7 +11,7 @@ public class Pais{
         Code="";
     }
 
-    public Pais(int idPais, string nom, int cod){
+    public Pais(int idPais, string nom, string cod){
         Id=idPais;
         Nombre = nom;
         Code=cod;

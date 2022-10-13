@@ -1,5 +1,7 @@
 namespace TP09.Models;
 
+using System;
+
 public class Piloto {
     public int Id {get;}
     public string Nombre{get;set;}

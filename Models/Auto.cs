@@ -7,7 +7,7 @@ public class Auto{
     public float HP{get;}
     public float Peso{get;}
     public string Categoria{get;}
-    public date Anno{get;}
+    public DateTime Anno{get;}
     public string Foto{get;}
 
     public Auto(){
@@ -17,18 +17,18 @@ public class Auto{
         HP=-1;
         Peso=-1;
         Categoria="";
-        Anno=new Date(1, 1, 1);
+        Anno=new DateTime(1, 1, 1);
         Foto="";
     }
 
-    public Auto(int idAuto, string nom, float tor, float cv, float pes, string cat, date yr, string fot){
+    public Auto(int idAuto, string nom, float tor, float cv, float pes, string cat, DateTime yr, string fot){
         Id=idAuto;
         Nombre = nom;
         Torque=tor;
         HP=cv;
         Peso = pes;
         Categoria = cat;
-        anno= yr; 
+        Anno= yr; 
         Foto=fot;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Tp09.Models;
+using TP09.Models;
 
 namespace Tp09.Controllers;
 
@@ -15,6 +15,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        ViewBag.tracks = DB.ListarTracks();
         return View();
     }
 
