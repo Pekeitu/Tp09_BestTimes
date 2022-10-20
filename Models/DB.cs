@@ -7,7 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 
 public static class DB {
-    private static string _connectionString =  @"Server=A-PHZ2-CIDI-040;DataBase=TP9;Trusted_Connection=True";
+    private static string _connectionString =  @"Server=A-PHZ2-CIDI-039;DataBase=TP9;Trusted_Connection=True";
 
     public static void AgregarConductor(Piloto conductor)
     {
@@ -59,7 +59,16 @@ public static class DB {
         using(SqlConnection db = new SqlConnection(_connectionString))
         {
             string sp = "BuscarTrack";
-            return db.QueryFirstOrDefault<Track>(sp, id, commandType: CommandType.StoredProcedure);
+            return db.QueryFirstOrDefault<Track>(sp, new {id}, commandType: CommandType.StoredProcedure);
+        }
+    }
+
+    public static Pais BuscarPaisxId(string id)
+    {
+        using(SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sp = "BuscarPaisxId";
+            return db.QueryFirstOrDefault<Pais>(sp, new {id}, commandType: CommandType.StoredProcedure);
         }
     }
 

@@ -19,6 +19,23 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult VerDetalleTrack(int id)
+    {
+        ViewBag.images = DB.BuscarFotosTrackxId(id);
+        ViewBag.Vueltas = DB.ListarVueltasxTrack(id);
+        return View();
+    }
+
+    public JsonResult BuscarTrackAjax(int IdTrack)
+    {
+        return Json(DB.BuscarTrack(IdTrack));
+    }
+
+    public JsonResult BuscarPaisAjax(string IdPais)
+    {
+        return Json(DB.BuscarPaisxId(IdPais));
+    }
+
     public IActionResult Privacy()
     {
         return View();
