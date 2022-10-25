@@ -1,17 +1,17 @@
 namespace TP09.Models;
 
 public class Pais{
-    public int Id{get;}
+    public string Id{get;}
     public string Nombre {get;}
     public string Code{get;}
 
     public Pais(){
-        Id=-1;
+        Id="";
         Nombre="";
         Code="";
     }
 
-    public Pais(int idPais, string nom, string cod){
+    public Pais(string idPais, string nom, string cod){
         Id=idPais;
         Nombre = nom;
         Code=cod;

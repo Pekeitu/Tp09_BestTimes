@@ -1,16 +1,18 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TP09.Models;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Tp09.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private IWebHostEnvironment Environment;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(IWebHostEnvironment environment)
     {
-        _logger = logger;
+        Environment = environment;
     }
 
     public IActionResult Index()
@@ -26,14 +28,17 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpPost]
     public JsonResult BuscarTrackAjax(int IdTrack)
     {
         return Json(DB.BuscarTrack(IdTrack));
     }
 
+    [HttpPost]
     public JsonResult BuscarPaisAjax(string IdPais)
     {
-        return Json(DB.BuscarPaisxId(IdPais));
+        Pais p = DB.BuscarPaisxId(IdPais);
+        return Json(new{pais=p, logo=this.Environment.ContentRootPath+"flags/"+p.Code+".png", flag=this.Environment.ContentRootPath+"flags-medium/"+p.Code+".png"});
     }
 
     public IActionResult Privacy()
