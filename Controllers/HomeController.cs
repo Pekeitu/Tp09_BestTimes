@@ -35,10 +35,17 @@ public class HomeController : Controller
     }
 
     [HttpPost]
+    public JsonResult BuscarFotosTrackAjax(int IdTrack)
+    {
+        return Json(DB.BuscarFotosTrackxId(IdTrack));
+    }
+
+    [HttpPost]
     public JsonResult BuscarPaisAjax(string IdPais)
     {
         Pais p = DB.BuscarPaisxId(IdPais);
-        return Json(new{pais=p, logo=this.Environment.ContentRootPath+"flags/"+p.Code+".png", flag=this.Environment.ContentRootPath+"flags-medium/"+p.Code+".png"});
+        //Asumimos que se utilizan las fotos proveidas, todas en formato png y ordenados por nombre (codigo) del pais
+        return Json(new{pais=p, logo="/flags/"+p.Code+".png", flag="/flags-medium/"+p.Code+".png"});
     }
 
     public IActionResult Privacy()
