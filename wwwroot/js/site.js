@@ -1,5 +1,6 @@
 ﻿function CargarModalTrack(idt) {
     let track = '';
+    let fotosTrack = '';
     let pais = '';
 
     $.ajax({
@@ -14,7 +15,18 @@
             }
     })
 
-    console.log(track);
+    $.ajax({
+        type: 'POST',
+        dataType: "JSON",
+        url: '/Home/BuscarFotosTrackAjax',
+        data: { IdTrack: track.id },
+        async: false,
+        success:
+            function (response) {
+                fotosTrack = response;
+                console.log(fotosTrack);
+            }
+    })
 
     $.ajax({
         type: 'POST',
@@ -28,14 +40,13 @@
             }
     })
 
-    console.log(pais);
-
     $("#modalInfoPaisLogo").attr("src", pais.logo);
     $("#modalInfoPaisTit").html(track.nombre);
-    //$("#FotoJugador").attr("src", response.foto);
-    //$("#NumCamiseta").html("Numero de camiseta: " + response.numCamiseta);
-    //$("#FechaNacimiento").html("Fecha de nacimiento: " + response.fechaNacimiento);
-    //$("#BtnConfirmarBorrado").attr("href", '@Url.Action("EliminarJugador", "Home")' + "?IdJugador=" + IdJ.toString() + "&IdEquipo=" + IdE.toString());
+
+    let bodytxt = "<p>" + track.nombre + " es un track de carreras ubicado en " + pais.pais.nombre + ".</p>";
+    bodytxt += "<p> tiene una longitud de " + track.longitud + "km, y fue inaugurado el " + track.fechaInauguracion.substr(0,10) + "</p>";
+    bodytxt += "<img src=" + fotosTrack[0] + " class='border rounded mw-100 h-auto'>";
+    $("#modalInfoPaisBody").html(bodytxt);
 
     var modal = new bootstrap.Modal(document.getElementById('modalInfoPais'), {
         keyboard: false
