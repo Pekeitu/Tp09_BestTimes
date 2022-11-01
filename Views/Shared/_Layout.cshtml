@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,46 +9,46 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Tp09.styles.css" asp-append-version="true" />
 </head>
+
 <body>
     <header>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <!-- Container wrapper -->
-        <div class="container">
-            <!-- Navbar brand -->
-            <a class="navbar-brand" href="#"><img id="MDB-logo"
-                src="\photos\" alt="MDB Logo"
-                draggable="false" height="30" /></a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+            <!-- Container wrapper -->
+            <div class="container">
+                <!-- Navbar brand -->
+                <a class="navbar-brand" href="#"><img id="MDB-logo" src="\photos\" alt="MDB Logo" draggable="false" height="30" /></a>
 
-            <!-- Toggle button -->
-            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-            </button>
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
 
-            <!-- Collapsible wrapper -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left links -->
-            <ul class="navbar-nav me-3">
-                <li class="nav-item">
-                <a class="nav-link active d-flex align-items-center" aria-current="page" href="#"><i
-                    class="fas fa-bars pe-2"></i>Menu</a>
-                </li>
-            </ul>
-            <!-- Left links -->
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-3">
+                        <li class="nav-item">
+                            <a class="nav-link active d-flex align-items-center" aria-current="page" href="#"><i class="fas fa-bars pe-2"></i>Menu</a>
+                        </li>
+                    </ul>
+                    <!-- Left links -->
 
-            <form class="d-flex align-items-center w-100 form-search">
-                <div class="input-group">
-                <input type="search" class="form-control" placeholder="Search" aria-label="Search" />
+                    <form class="d-flex align-items-center w-100 form-search">
+                        <div class="input-group">
+                            <input type="search" class="form-control" placeholder="Search" aria-label="Search" />
+                        </div>
+                        <div class="input-group">
+                            <a href="#!" class="text-white"><i class="fas fa-search ps-3"></i></a>
+                        </div>
+                    </form>
+
                 </div>
-                <a href="#!" class="text-white"><i class="fas fa-search ps-3"></i></a>
-            </form>
-
+                <!-- Collapsible wrapper -->
             </div>
-            <!-- Collapsible wrapper -->
-        </div>
-        <!-- Container wrapper -->
+            <!-- Container wrapper -->
         </nav>
         <!-- Navbar -->
     </header>
@@ -67,4 +68,5 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

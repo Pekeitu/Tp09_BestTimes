@@ -7,7 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 
 public static class DB {
-    private static string _connectionString =  @"Server=A-PHZ2-CIDI-015;DataBase=TP9;Trusted_Connection=True";
+    private static string _connectionString =  @"Server=A-PHZ2-CIDI-006;DataBase=TP9;Trusted_Connection=True";
 
     public static void AgregarConductor(Piloto conductor)
     {
@@ -41,7 +41,7 @@ public static class DB {
         using(SqlConnection db = new SqlConnection(_connectionString))
         {
             string sp = "BuscarConductorxId";
-            return db.QueryFirstOrDefault<Piloto>(sp, id, commandType: CommandType.StoredProcedure);
+            return db.QueryFirstOrDefault<Piloto>(sp, new {id}, commandType: CommandType.StoredProcedure);
         }
     }
 
@@ -50,7 +50,7 @@ public static class DB {
         using(SqlConnection db = new SqlConnection(_connectionString))
         {
             string sp = "BuscarFotosTrackxId";
-            return db.Query<string>(sp, id, commandType: CommandType.StoredProcedure).ToList();
+            return db.Query<string>(sp, new {id}, commandType: CommandType.StoredProcedure).ToList();
         }
     }
 
@@ -95,7 +95,7 @@ public static class DB {
         using(SqlConnection db = new SqlConnection(_connectionString))
         {
             string sp = "ListarVueltasxTrack";
-            return db.Query<Vuelta>(sp, id, commandType: CommandType.StoredProcedure).ToList();
+            return db.Query<Vuelta>(sp, new{id}, commandType: CommandType.StoredProcedure).ToList();
         }
     }
 }

@@ -24,7 +24,7 @@ public class HomeController : Controller
     public IActionResult VerDetalleTrack(int id)
     {
         ViewBag.images = DB.BuscarFotosTrackxId(id);
-        ViewBag.Vueltas = DB.ListarVueltasxTrack(id);
+        ViewBag.vueltas = DB.ListarVueltasxTrack(id);
         return View();
     }
 
