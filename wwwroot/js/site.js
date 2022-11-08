@@ -53,3 +53,18 @@
     });
     modal.toggle();
 }
+
+function ListarPilotos(){
+      $.ajax({
+        url: 'https://ergast.com/api/f1/circuits.json?limit=100',
+        type: 'GET',
+        timeout: 0,
+        async: false,
+        success:
+            function(response)
+            {
+                console.log("me gusta el chinchulin");
+                console.log(response);
+            }
+      })
+}
