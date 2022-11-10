@@ -7,7 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 
 public static class DB {
-    private static string _connectionString =  @"Server=A-PHZ2-CIDI-006;DataBase=TP9;Trusted_Connection=True";
+    private static string _connectionString =  @"Server=A-PHZ2-CIDI-039;DataBase=TP9;Trusted_Connection=True";
 
     public static void AgregarConductor(Piloto conductor)
     {

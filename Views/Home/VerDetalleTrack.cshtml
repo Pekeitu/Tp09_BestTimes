@@ -1,12 +1,20 @@
-<div class="container float-start mw-70">
-    @foreach(Vuelta vuelta in @ViewBag.vueltas)
+<div class="flex-container w-auto border border-1 border-dark bg-secondary">
+    <div class="row">
+        <div class="col-2">
+            #
+        </div>
+        <div class="col-md-auto">
+            Nombre
+        </div>
+    </div>
+    @foreach (Vuelta vuelta in @ViewBag.vueltas)
     {
         <div class="row">
-            <div class="col-md-auto">
+            <div class="col-2">
                 i
             </div>
             <div class="col">
-                
+
             </div>
         </div>
     }

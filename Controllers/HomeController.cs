@@ -2,12 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using TP09.Models;
 using System.IO;
-using Microsoft.AspNetCore.Hosting;
+using System.Net;
+using System.Net.Http;
 
 namespace Tp09.Controllers;
 
 public class HomeController : Controller
 {
+    static readonly HttpClient client = new HttpClient();
+
     private IWebHostEnvironment Environment;
 
     public HomeController(IWebHostEnvironment environment)
@@ -15,8 +18,24 @@ public class HomeController : Controller
         Environment = environment;
     }
 
+    string JsonCircuitos = "";
+
+    public string Get(string url)
+    {
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+        using (Stream stream = response.GetResponseStream())
+        using (StreamReader reader = new StreamReader(stream))
+        {
+            return reader.ReadToEnd();
+        }
+    }
+
     public IActionResult Index()
     {
+        if(JsonCircuitos == "") JsonCircuitos = Get("https://ergast.com/api/f1/circuits.json?limit=100");
         ViewBag.tracks = DB.ListarTracks();
         return View();
     }
@@ -45,7 +64,7 @@ public class HomeController : Controller
     {
         Pais p = DB.BuscarPaisxId(IdPais);
         //Asumimos que se utilizan las fotos proveidas, todas en formato png y ordenados por nombre (codigo) del pais
-        return Json(new{pais=p, logo="/flags/"+p.Code+".png", flag="/flags-medium/"+p.Code+".png"});
+        return Json(new { pais = p, logo = "/flags/" + p.Code + ".png", flag = "/flags-medium/" + p.Code + ".png" });
     }
 
     public IActionResult Privacy()
