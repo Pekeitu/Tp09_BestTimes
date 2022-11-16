@@ -1,57 +1,19 @@
-﻿function CargarModalTrack(idt) {
-    let track = '';
-    let fotosTrack = '';
-    let pais = '';
+﻿function FirstLetterUpper(str)
+{
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
-    $.ajax({
-        type: 'POST',
-        dataType: "JSON",
-        url: '/Home/BuscarTrackAjax',
-        data: { IdTrack: idt },
-        async: false,
-        success:
-            function (response) {
-                track = response;
-            }
-    })
-
-    $.ajax({
-        type: 'POST',
-        dataType: "JSON",
-        url: '/Home/BuscarFotosTrackAjax',
-        data: { IdTrack: track.id },
-        async: false,
-        success:
-            function (response) {
-                fotosTrack = response;
-                console.log(fotosTrack);
-            }
-    })
-
-    $.ajax({
-        type: 'POST',
-        dataType: "JSON",
-        url: '/Home/BuscarPaisAjax',
-        data: { IdPais: track.idPais },
-        async: false,
-        success:
-            function (response) {
-                pais = response;
-            }
-    })
-
-    $("#modalInfoPaisLogo").attr("src", pais.logo);
-    $("#modalInfoPaisTit").html(track.nombre);
-
-    let bodytxt = "<p>" + track.nombre + " es un track de carreras ubicado en " + pais.pais.nombre + ".</p>";
-    bodytxt += "<p> tiene una longitud de " + track.longitud + "km, y fue inaugurado el " + track.fechaInauguracion.substr(0,10) + "</p>";
-    bodytxt += "<img src=" + fotosTrack[0] + " class='border rounded mw-100 h-auto'>";
-    $("#modalInfoPaisBody").html(bodytxt);
-
-    var modal = new bootstrap.Modal(document.getElementById('modalInfoPais'), {
-        keyboard: false
+function CargarImgCard(element, id){
+    let imgs = Array.from(document.getElementsByClassName('card-img-top'));
+    let url = "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/CircuitName_Circuit.png.transform/2col-retina/image.png";
+    imgs.forEach(element => {
+        element.setAttribute('src', url.replace('CircuitName', FirstLetterUpper(element.getAttribute('id'))));
     });
-    modal.toggle();
+
+    //Seteados manualmente por discrepancias entre el nombre de la api de ergast y el nombre en la pagina de formula1
+    $("#Azerbaijan").attr("src", "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Baku_Circuit.png.transform/2col-retina/image.png");
+    $("#Monaco").attr("src", "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Monoco_Circuit.png.transform/2col-retina/image.png");
+    $("#UAE").attr("src", "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Abu_Dhabi_Circuit.png.transform/2col-retina/image.png");
 }
 
 function ListarPilotos(){

@@ -4,6 +4,8 @@ using TP09.Models;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 
 namespace Tp09.Controllers;
 
@@ -18,7 +20,7 @@ public class HomeController : Controller
         Environment = environment;
     }
 
-    string JsonCircuitos = "";
+    static List<Track> tracks;
 
     public string Get(string url)
     {
@@ -33,14 +35,23 @@ public class HomeController : Controller
         }
     }
 
+    public T parseResponse<T>(string json)
+    {
+        return JsonSerializer.Deserialize<StandardResponseRoot<T>>(json).response;
+    }
+
     public IActionResult Index()
     {
-        if(JsonCircuitos == "") JsonCircuitos = Get("https://ergast.com/api/f1/circuits.json?limit=100");
-        ViewBag.tracks = DB.ListarTracks();
+        if(tracks == null)
+        {
+            string json = Get("https://ergast.com/api/f1/circuits.json?limit=100");
+            tracks = parseResponse<TrackTable>(json).obj.tracks;
+        }
+        ViewBag.tracks = tracks;
         return View();
     }
 
-    public IActionResult VerDetalleTrack(int id)
+    /*public IActionResult VerDetalleTrack(int id)
     {
         ViewBag.images = DB.BuscarFotosTrackxId(id);
         ViewBag.vueltas = DB.ListarVueltasxTrack(id);
@@ -65,7 +76,7 @@ public class HomeController : Controller
         Pais p = DB.BuscarPaisxId(IdPais);
         //Asumimos que se utilizan las fotos proveidas, todas en formato png y ordenados por nombre (codigo) del pais
         return Json(new { pais = p, logo = "/flags/" + p.Code + ".png", flag = "/flags-medium/" + p.Code + ".png" });
-    }
+    }*/
 
     public IActionResult Privacy()
     {
