@@ -51,14 +51,16 @@ public class HomeController : Controller
         return View();
     }
 
-    /*public IActionResult VerDetalleTrack(int id)
+    public IActionResult VerDetalleTrack(string IdT)
     {
-        ViewBag.images = DB.BuscarFotosTrackxId(id);
-        ViewBag.vueltas = DB.ListarVueltasxTrack(id);
+        string json = Get("https://ergast.com/api/f1/current/circuits/" + IdT + "/results.json?limit=50");
+        var resultados = parseResponse<TablaCarreras>(json);
+        //ViewBag.images = DB.BuscarFotosTrackxId(id);
+        //ViewBag.vueltas = DB.ListarVueltasxTrack(id);
         return View();
     }
 
-    [HttpPost]
+    /*[HttpPost]
     public JsonResult BuscarTrackAjax(int IdTrack)
     {
         return Json(DB.BuscarTrack(IdTrack));
