@@ -27,7 +27,8 @@
                 </button>
                 <form class="d-flex align-items-center w-100 form-search">
                     <div class="input-group">
-                        <input type="search" class="form-control" placeholder="Search a track by its name" aria-label="Search" id="searchbar" />
+                        <input type="search" class="form-control" placeholder="Search a track by its name" aria-label="Search" id="searchbar" onkeypress="HandlerSearchbar(event)"/>
+                        <input type="hidden" value="" id="currentSearch"/>
                     </div>
                     <a href="#!" class="text-white"></a>
                 </form>

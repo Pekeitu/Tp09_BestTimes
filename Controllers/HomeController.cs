@@ -54,7 +54,7 @@ public class HomeController : Controller
     public IActionResult VerDetalleTrack(string IdT)
     {
         string json = Get("https://ergast.com/api/f1/current/circuits/" + IdT + "/results.json?limit=50");
-        var resultados = parseResponse<TablaCarreras>(json).obj.carreras;
+        //ViewBag.listCarreras = parseResponse<TablaCarreras>(json).obj.carreras;
         //ViewBag.images = DB.BuscarFotosTrackxId(id);
         //ViewBag.vueltas = DB.ListarVueltasxTrack(id);
         return View();

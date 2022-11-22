@@ -31,6 +31,7 @@ function ListarPilotos(){
       })
 }
 
-function CrearListenerSearchbar(){
-    //$("#searchbar").
+function HandlerSearchbar(event){
+    $("#currentSearch").val($("#currentSearch").val() + event.code.slice(-1));
+    
 }
