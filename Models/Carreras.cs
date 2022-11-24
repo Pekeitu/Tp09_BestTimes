@@ -32,7 +32,7 @@ public class Resultado
     [JsonPropertyName("status")]
     public string estado { get; set; }
 
-    [JsonPropertyName("time")]
+    [JsonPropertyName("Time")]
     public Tiempo tiempo { get; set; }
 
     [JsonPropertyName("FastestLap")]

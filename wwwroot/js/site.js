@@ -25,13 +25,22 @@ function ListarPilotos(){
         success:
             function(response)
             {
-                console.log("me gusta el chinchulin");
                 console.log(response);
             }
       })
 }
 
 function HandlerSearchbar(event){
-    $("#currentSearch").val($("#currentSearch").val() + event.code.slice(-1));
-    
+    let currentVal = $("#searchBarInput").val() + event.code.slice(-1).toLowerCase();
+
+    // Declare variables
+    $.ajax({
+        type: 'POST',
+        dataType: "JSON",
+        url: '/Home/listarTracksxNombre',
+        success:
+          function (response) {
+            response.forEach(element => console.log(element));
+          }
+    })
 }

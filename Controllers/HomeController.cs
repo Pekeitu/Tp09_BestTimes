@@ -22,6 +22,7 @@ public class HomeController : Controller
     }
 
     static List<Track> tracks;
+    static List<string> listaTracksxNombre; //cache
 
     public string Get(string url)
     {
@@ -58,6 +59,14 @@ public class HomeController : Controller
         var listCarreras = parseResponse<TablaCarreras>(json).obj.carreras;
         ViewBag.carreras = listCarreras; //Siempre tenemos solamente una carrera
         return View();
+    }
+
+    public List<string> listarTracksxNombre()
+    {
+        if(listaTracksxNombre != null) return listaTracksxNombre;
+        listaTracksxNombre = new List<string>();
+        foreach(Track t in tracks) listaTracksxNombre.Add(t.nombre);
+        return listaTracksxNombre;
     }
 
     /*[HttpPost]
