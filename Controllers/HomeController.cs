@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TP09.Models;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -53,10 +54,9 @@ public class HomeController : Controller
 
     public IActionResult VerDetalleTrack(string IdT)
     {
-        string json = Get("https://ergast.com/api/f1/current/circuits/" + IdT + "/results.json?limit=50");
-        //ViewBag.listCarreras = parseResponse<TablaCarreras>(json).obj.carreras;
-        //ViewBag.images = DB.BuscarFotosTrackxId(id);
-        //ViewBag.vueltas = DB.ListarVueltasxTrack(id);
+        string json = Get("https://ergast.com/api/f1/circuits/" + IdT + "/results.json?limit=1000");
+        var listCarreras = parseResponse<TablaCarreras>(json).obj.carreras;
+        ViewBag.carreras = listCarreras; //Siempre tenemos solamente una carrera
         return View();
     }
 
