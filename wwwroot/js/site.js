@@ -32,6 +32,7 @@ function ListarPilotos(){
 
 function HandlerSearchbar(event){
     let currentVal = $("#searchBarInput").val() + event.code.slice(-1).toLowerCase();
+    $(".navbar .navbar-expand-lg .navbar-dark .bg-dark").html("");
 
     // Declare variables
     $.ajax({
@@ -41,10 +42,9 @@ function HandlerSearchbar(event){
         success:
           function (response) {
             response.forEach(element => {
-                console.log(element.slice(0,currentVal.Length));
-                //if(element.slice(0,currentVal.Length) == currentVal){
+                if(element.toLowerCase().includes(currentVal.toLowerCase()) == true){
                     
-               // }
+               }
             });
           }
     })
