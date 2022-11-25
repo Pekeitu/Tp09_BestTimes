@@ -30,22 +30,39 @@ function ListarPilotos(){
       })
 }
 
-function HandlerSearchbar(event){
-    let currentVal = $("#searchBarInput").val() + event.code.slice(-1).toLowerCase();
-    $(".navbar .navbar-expand-lg .navbar-dark .bg-dark").html("");
+function HandlerSearchbar(input){
+    document.querySelector("[data-result-container]").innerHTML = "";
+    if(input.length < 3) return;
 
-    // Declare variables
-    $.ajax({
-        type: 'POST',
-        dataType: "JSON",
-        url: '/Home/listarTracksxNombre',
-        success:
-          function (response) {
-            response.forEach(element => {
-                if(element.toLowerCase().includes(currentVal.toLowerCase()) == true){
-                    
-               }
-            });
-          }
-    })
+    let tracks;
+
+    //Cacheo de los tracks desde el lado del cliente
+    if(sessionStorage.getItem("tracks")) tracks = JSON.parse(sessionStorage.getItem("tracks"));
+    else {
+        $.ajax({
+            type: 'POST',
+            dataType: "JSON",
+            url: '/Home/listarTracksxNombre',
+            async: false,
+            success:
+              function (response) {
+                console.log(response);
+                sessionStorage.setItem("tracks", JSON.stringify(response));
+                tracks = response;
+              }
+        })
+    }
+
+    const resultTemplate = document.querySelector("[data-result-template]");
+
+    tracks.forEach(element => {
+        if(element.nombre.toLowerCase().includes(input.toLowerCase()) == true){
+            const result = resultTemplate.content.cloneNode(true).children[0];
+            console.log();
+            const link = result.querySelector("[data-result-text]");
+            link.textContent = element.nombre;
+            link.setAttribute("href", "/Home/VerDetalleTrack?IdT=" + element.id);
+            document.querySelector("[data-result-container]").append(result);
+        }
+    });
 }

@@ -22,7 +22,7 @@ public class HomeController : Controller
     }
 
     static List<Track> tracks;
-    static List<string> listaTracksxNombre; //cache
+    static List<dynamic> listaTracksxNombre; //cache
 
     public string Get(string url)
     {
@@ -61,12 +61,16 @@ public class HomeController : Controller
         return View();
     }
 
-    public List<string> listarTracksxNombre()
+    public JsonResult listarTracksxNombre()
     {
-        if(listaTracksxNombre != null) return listaTracksxNombre;
-        listaTracksxNombre = new List<string>();
-        foreach(Track t in tracks) listaTracksxNombre.Add(t.nombre);
-        return listaTracksxNombre;
+        if(listaTracksxNombre != null) return Json(listaTracksxNombre);
+        listaTracksxNombre = new List<dynamic>();
+        foreach(Track t in tracks)
+        {
+            var element = new {t.nombre, t.id};
+            listaTracksxNombre.Add(element);
+        }
+        return Json(listaTracksxNombre);
     }
 
     /*[HttpPost]
