@@ -29,7 +29,7 @@ public class VueltaRapida
     [JsonPropertyName("lap")]
     public string vuelta { get; set; } //vuelta en la que se realizo la vuelta mas rapida
 
-    [JsonPropertyName("time")]
+    [JsonPropertyName("Time")]
     public Tiempo tiempo { get; set; }
 
     [JsonPropertyName("AverageSpeed")]

@@ -1,52 +1,18 @@
 <p> GP de @ViewBag.carreras[@ViewBag.carreras.Count - 1].track.nombre en el cual se corrio por ultima vez el
     @ViewBag.carreras[@ViewBag.carreras.Count - 1].raceName en @ViewBag.Carreras[@ViewBag.carreras.Count - 1].fecha </p>
 
-@* <div class="flex-container w-auto border border-1 border-dark bg-secondary">
-    <div class="row">
-    <div class="col-2">
-    #
-    </div>
-    <div class="col-md-auto">
-    Nombre
-    </div>
-    </div>
-    <div class="row">
-    <div class="col">
-    Pos Final
-    </div>
-    <div class="col">
-    num cond y Nom cond
-    </div>
-    <div class="col">
-    cons
-    </div>
-    <div class="col">
-    estado
-    </div>
-    <div class="col">
-    Tiempo
-    </div>
-    <div class="col">
-    fastest lap
-    </div>
-    <div class="col">
-
-    </div>
-    <div class="col">
-
-    </div>
-
-
-    </div>
-    </div> *@
-
 <table class="table table-dark table-striped">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">No</th>
+            <th scope="col">Piloto</th>
+            <th scope="col">Constructor</th>
+            <th scope="col">Vueltas</th>
+            <th scope="col">Parrilla</th>
+            <th scope="col">Tiempo</th>
+            <th scope="col">Vuelta mas rapida</th>
+            <th scope="col">Puntos</th>
         </tr>
     </thead>
 
@@ -55,9 +21,22 @@
         {
             <tr>
                 <th scope="row">@r.posicionFinal</th>
+                <td>@r.numeroConductor</td>
                 <td>@(r.conductor.Nombre + " " + r.conductor.Apellido)</td>
-                @if(@r.tiempo == null) {<td>NF</td>}
-                else {<td>@r.tiempo.tiempo</td>}
+                <td>@r.constructor.Nombre</td>
+                <td>@r.vueltas</td>
+                <td>@r.posicionParrilla</td>
+                @if(r.tiempo != null){
+                    <td>@r.tiempo.tiempo</td>
+                }else{
+                    <td>@r.estado</td>
+                }
+                @if(r.vueltaRapida == null){
+                    <td>-</td>
+                }else{
+                    <td>@r.vueltaRapida.tiempo.tiempo</td>
+                }
+                <td>@r.puntaje</td>
             </tr>
         }
     </tbody>
