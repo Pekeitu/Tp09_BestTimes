@@ -40,7 +40,12 @@ function HandlerSearchbar(event){
         url: '/Home/listarTracksxNombre',
         success:
           function (response) {
-            response.forEach(element => console.log(element));
+            response.forEach(element => {
+                console.log(element.slice(0,currentVal.Length));
+                //if(element.slice(0,currentVal.Length) == currentVal){
+                    
+               // }
+            });
           }
     })
 }
