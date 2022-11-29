@@ -16,3 +16,17 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.transicion::after {
+  display:block;
+  background-color: #000000;
+
+  width: 0%;
+  content: "";
+  height: 4px;
+  transition: width 0.5s;
+}
+
+.transicion:hover::after {
+  width: 100%;
+}

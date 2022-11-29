@@ -32,6 +32,7 @@ function ListarPilotos(){
 
 function HandlerSearchbar(input){
     document.querySelector("[data-result-container]").innerHTML = "";
+    $("#resultContainer").removeClass('border');
     if(input.length < 3) return;
 
     let tracks;
@@ -53,6 +54,8 @@ function HandlerSearchbar(input){
         })
     }
 
+    $("#resultContainer").addClass('border');
+    
     const resultTemplate = document.querySelector("[data-result-template]");
 
     tracks.forEach(element => {
@@ -86,7 +89,7 @@ function CambiarAnnoTrack(IdT, anno)
                     html += "<th scope='row'>" + element.position + "</th>";
                     html += "<td>" + element.number + "</td>";
                     html += "<td>" + (element.Driver.givenName + " " + element.Driver.familyName) + "</td>";
-                    html += "<td>" + element.constructor.name + "</td>";
+                    html += "<td>" + element.Constructor.name + "</td>";
                     html += "<td>" + element.laps + "</td>";
                     html += "<td>" + element.grid + "</td>";
                     if(element.Time == null) html += "<td>" + element.status + "</td>";

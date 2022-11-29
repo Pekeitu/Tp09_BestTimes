@@ -16,7 +16,7 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="max-height: 60px;">
             <div class="container">
-                <a class="navbar-brand" href="#"><img id="MDB-logo"
+                <a class="navbar-brand" href="/"><img id="MDB-logo"
                     src="https://mdbcdn.b-cdn.net/wp-content/uploads/2018/06/logo-mdb-jquery-small.png" alt="MDB Logo"
                     draggable="false" height="30" /></a>
                 <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
@@ -24,17 +24,19 @@
                 aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
                 </button>
-                <form class="content d-flex flex-column justify-content-center align-items-center w-100">
+                <form class="d-flex justify-content-center flex-column w-100">
                     <div class="input-group">
                         <input type="search" class="form-control" placeholder="Buscar a un track por su nombre" aria-label="Search" id="searchBarInput" oninput="HandlerSearchbar(this.value)" autocomplete="off"/>
                     </div>
                     
-                    <div class="w-100 bg-white text-center" id="resultContainer" style="z-index: 5" data-result-container>
+                    <div class="position-relative w-100">
+                        <div class="container-fluid bg-white text-center position-absolute text-center border-3 border-secondary" id="resultContainer" style="z-index: 5; max-height: 50vh; overflow-y: auto; overflow-x: hidden;" data-result-container>
+                        </div>
                     </div>
 
                     <template data-result-template>
-                        <div class="border row">
-                            <a data-result-text style="user-select: none"></a>
+                        <div class="row mt-2 mb-2">
+                            <a class="text-decoration-none font-weight-bold h6 transicion" data-result-text style="user-select: none"></a>
                         </div>
                     </template>
 

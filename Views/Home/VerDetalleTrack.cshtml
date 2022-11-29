@@ -1,11 +1,14 @@
 <div class="d-flex flex-row justify-content-between align-items-center mt-3">
     <p class="mt-3 text-center" id="presentationText"> @ViewBag.ultimaCarrera.raceName de @ViewBag.ultimaCarrera.temporada </p>
 
-    <div class="d-flex flex-column float-end" style="overflow-y: auto; height: 45px;">
-        @foreach(string anno in @ViewBag.annosCorridos)
-        {
-            <button onclick="CambiarAnnoTrack('@ViewBag.ultimaCarrera.track.id', '@anno')" style="height: 30px;">@anno</button>
-        }
+    <div class="d-flex align-items-center flex-row">
+        <p class="me-2">Seleccionar año:</p>
+        <div class="d-flex flex-column" style="overflow-y: auto; height: 45px; scroll-behaviour: smooth;">
+            @foreach(string anno in @ViewBag.annosCorridos)
+            {
+                <a class="link-secondary font-weight-bold" onclick="CambiarAnnoTrack('@ViewBag.ultimaCarrera.track.id', '@anno')" style="height: 30px;">@anno</a>
+            }
+        </div>
     </div>
 </div>
 
