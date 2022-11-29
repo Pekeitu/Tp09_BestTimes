@@ -24,18 +24,16 @@
                 aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
                 </button>
-                <form class="d-flex flex-column align-items-center w-100 form-search overflow-visible">
-                    <div class="position-relative input-group">
-                        <input type="search" class="form-control" placeholder="Buscar a un track por su nombre" aria-label="Search" id="searchBarInput" oninput="HandlerSearchbar(this.value)"/>
+                <form class="content d-flex flex-column justify-content-center align-items-center w-100">
+                    <div class="input-group">
+                        <input type="search" class="form-control" placeholder="Buscar a un track por su nombre" aria-label="Search" id="searchBarInput" oninput="HandlerSearchbar(this.value)" autocomplete="off"/>
                     </div>
                     
-                    <div class="container">
-                        <div class="position-absolute container bg-white" style="z-index: 5" id="resultContainer" data-result-container>
-                        </div>
+                    <div class="w-100 bg-white text-center" id="resultContainer" style="z-index: 5" data-result-container>
                     </div>
 
                     <template data-result-template>
-                        <div class="row">
+                        <div class="border row">
                             <a data-result-text style="user-select: none"></a>
                         </div>
                     </template>

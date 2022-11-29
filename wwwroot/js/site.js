@@ -58,11 +58,45 @@ function HandlerSearchbar(input){
     tracks.forEach(element => {
         if(element.nombre.toLowerCase().includes(input.toLowerCase()) == true){
             const result = resultTemplate.content.cloneNode(true).children[0];
-            console.log();
             const link = result.querySelector("[data-result-text]");
             link.textContent = element.nombre;
             link.setAttribute("href", "/Home/VerDetalleTrack?IdT=" + element.id);
             document.querySelector("[data-result-container]").append(result);
         }
     });
+}
+
+function CambiarAnnoTrack(IdT, anno)
+{
+    $.ajax({
+        type: 'POST',
+        url: '/Home/BuscarCarreraxAno',
+        dataType: 'JSON',
+        data: {IdT, anno},
+        success:
+            function(response)
+            {
+                $("#presentationText").text(response.raceName + " de " + response.season);
+
+                let html = "";
+                response.Results.forEach(element => {
+                    console.log(element);
+                    //Los elementos toman el nombre json de los models, es decir los nombres tal y como vienen de la api
+                    html += "<tr>";
+                    html += "<th scope='row'>" + element.position + "</th>";
+                    html += "<td>" + element.number + "</td>";
+                    html += "<td>" + (element.Driver.givenName + " " + element.Driver.familyName) + "</td>";
+                    html += "<td>" + element.constructor.name + "</td>";
+                    html += "<td>" + element.laps + "</td>";
+                    html += "<td>" + element.grid + "</td>";
+                    if(element.Time == null) html += "<td>" + element.status + "</td>";
+                    else html += "<td>" + element.Time.time + "</td>";
+                    if(element.fastestLap == null) html += "<td>-</td>";
+                    else html += "<td>" + element.fastestLap.Time.time + "</td>";
+                    html += "<td>" + element.points + "</td>";
+                    html += "</tr>";
+                });
+                $("#tableWrapper").html(html);
+            }
+    })
 }

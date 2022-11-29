@@ -53,11 +53,32 @@ public class HomeController : Controller
         return View();
     }
 
+    public List<string> ListarAñosConduccion(string IdT)
+    {
+        string json = Get("https://ergast.com/api/f1/circuits/" + IdT + "/results/1.json?limit=1000");
+        List<Carrera> carreras = parseResponse<TablaCarreras>(json).obj.carreras;
+        List<string> annos = new List<string>();
+        foreach(Carrera c in carreras)
+        {
+            annos.Add(c.temporada);
+        }
+        return annos;
+    }
+
+    [HttpPost]
+    public Carrera BuscarCarreraxAno(string IdT, string anno)
+    {
+        string json = Get("https://ergast.com/api/f1/" + anno + "/circuits/" + IdT + "/results.json?limit=1000");
+        var carrera = parseResponse<TablaCarreras>(json).obj.carreras[0];
+        return carrera;
+    }
+
     public IActionResult VerDetalleTrack(string IdT)
     {
-        string json = Get("https://ergast.com/api/f1/circuits/" + IdT + "/results.json?limit=1000");
-        var listCarreras = parseResponse<TablaCarreras>(json).obj.carreras;
-        ViewBag.carreras = listCarreras; //Siempre tenemos solamente una carrera
+        List<string> annos = ListarAñosConduccion(IdT);
+        Carrera ultimaCarrera = BuscarCarreraxAno(IdT, annos.Last());
+        ViewBag.annosCorridos = annos;
+        ViewBag.ultimaCarrera = ultimaCarrera;
         return View();
     }
 
@@ -72,26 +93,6 @@ public class HomeController : Controller
         }
         return Json(listaTracksxNombre);
     }
-
-    /*[HttpPost]
-    public JsonResult BuscarTrackAjax(int IdTrack)
-    {
-        return Json(DB.BuscarTrack(IdTrack));
-    }
-
-    [HttpPost]
-    public JsonResult BuscarFotosTrackAjax(int IdTrack)
-    {
-        return Json(DB.BuscarFotosTrackxId(IdTrack));
-    }
-
-    [HttpPost]
-    public JsonResult BuscarPaisAjax(string IdPais)
-    {
-        Pais p = DB.BuscarPaisxId(IdPais);
-        //Asumimos que se utilizan las fotos proveidas, todas en formato png y ordenados por nombre (codigo) del pais
-        return Json(new { pais = p, logo = "/flags/" + p.Code + ".png", flag = "/flags-medium/" + p.Code + ".png" });
-    }*/
 
     public IActionResult Privacy()
     {
