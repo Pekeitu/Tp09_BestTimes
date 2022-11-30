@@ -17,16 +17,10 @@ body {
   margin-bottom: 60px;
 }
 
-.transicion::after {
-  display:block;
-  background-color: #000000;
+.transicion:hover {
+  background-color: lightgrey;
 
-  width: 0%;
-  content: "";
-  height: 4px;
-  transition: width 0.5s;
-}
-
-.transicion:hover::after {
-  width: 100%;
+  -webkit-transition: background-color 0.5s linear;
+  -moz-transition: background-color 0.5s linear;
+  transition: background-color 0.5s linear;
 }

@@ -16,6 +16,12 @@ function CargarImgCard(element, id){
     $("#UAE").attr("src", "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Abu_Dhabi_Circuit.png.transform/2col-retina/image.png");
 }
 
+function CargarImgStock(element){
+    element.setAttribute('src', "https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg");
+    element.style.height = "161px";
+    element.style.width = "286px";
+}
+
 function ListarPilotos(){
       $.ajax({
         url: 'https://ergast.com/api/f1/circuits.json?limit=100',
